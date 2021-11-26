@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Coin } from '../models/coin.model';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,26 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  items = [
-    "read",
-    "write",
-    "learn",
-    "code"
+  @Input() coin: Coin[] = [];
+
+  coins: Array<Coin> = [];
+
+  nameCoins = [
+    "bitcoin", "solana", "chainlink"
   ];
-   newItem : any;
 
   constructor() { }
 
   ngOnInit(): void {
+
+  }
+  ngOnChanges(): void {
+    this.setCoins();
   }
 
-  deleteItem(index: any) {
-    this.items.splice(index, 1);
+  setCoins() {
+    console.log("COIN INPUT  : ", this.coin);
+    this.coins = this.coin.filter(
+      (coin: any) =>
+        this.nameCoins.includes(coin.id)
+    );
+    console.log("COINS ARRAY  : ", this.coins);
   }
 
-  addItem(newItem: any) {
-    if (newItem) {
-      this.items.push(newItem);
-    }
-  }
 }

@@ -1,0 +1,19 @@
+:host {
+    width: 100%;
+    display: inline-flex;
+  }
+   
+  .img-logo{
+    width: 25px;
+    height:25px;
+  }
+
+  .coin-card {
+    margin: 4px;
+  }
+  #img-logo{
+    width:50px;
+  }
+  .mat-card{
+    border-style: solid;
+  }

@@ -1,12 +1,8 @@
-<h1>To do list!</h1>
-<ul>
-    <li *ngFor="let item of items, let myIndex = index">
-        {{item}}
-        <br>
-        <button type="button" class="btn btn-danger" (click)="deleteItem(myIndex)">Delete item</button>
-    </li>
-</ul>
-<p>Add new item</p>
-<input #newItem id="item" type="text" name="item" class="form-control" (keyup.enter)="addItem(newItem.value)">
-<br>
-<button type="button" class="btn btn-success" (click)="addItem(newItem.value)">Submit</button>
+<div id="coins-container">
+    <p>Dashboard</p>
+    <div *ngIf="coins.length" class="coins-list">
+        <div *ngFor="let coin of coins">
+            <app-coin [coin]="coin"></app-coin>
+        </div>
+    </div>
+</div>
