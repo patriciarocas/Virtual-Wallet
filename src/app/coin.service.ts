@@ -11,24 +11,10 @@ export class CoinService {
 
   constructor(private http: HttpClient) { }
 
+  
 
   getCoins(): Observable<Coin[]> {
-    return this.http.get(this.API_URL).pipe(
-      map((data) => {
-        return this.transform(data)
-      })
-    );
-  }
+   return this.http.get(this.API_URL) as Observable<Coin[]>;
+}
 
-  private transform(coin: any): Coin[] {
-    const data = coin.map((obj: any) => ({
-      id: obj.id,
-      name: obj.name,
-      current_price: obj.current_price,
-      last_updated: obj.last_updated,
-      image: obj.image
-    })
-    );
-    return data;
-  }
 }

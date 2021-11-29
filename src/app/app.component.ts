@@ -22,7 +22,6 @@ export class AppComponent {
   getCoinsData() {
     this.coinService.getCoins().subscribe((response) => {
       this.coins = response;
-      console.log(this.coins);
     })
   }
 }

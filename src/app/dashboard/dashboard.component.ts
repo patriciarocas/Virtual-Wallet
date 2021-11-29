@@ -27,12 +27,10 @@ export class DashboardComponent implements OnInit {
   }
 
   setCoins() {
-    console.log("COIN INPUT  : ", this.coin);
     this.coins = this.coin.filter(
       (coin: any) =>
         this.nameCoins.includes(coin.id)
     );
-    console.log("COINS ARRAY  : ", this.coins);
   }
 
 }
