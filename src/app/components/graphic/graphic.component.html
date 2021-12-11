@@ -1,8 +1,13 @@
 <mat-card class="container">
+  <p> Please select the currency to display the chart!</p><br>
   <mat-card-title>
-    Graphic
+    {{coinName}}
   </mat-card-title>
-  <mat-card-content> 
-    {{ coinId }}
+  <mat-card-content>
+    <mat-slide-toggle [(ngModel)]="checked" class="example-margin" [color]="color" (change)="onChange()">
+      Change Graphic 
+    </mat-slide-toggle>
+    <div *ngIf="type == 'bar'" echarts [options]="options" [merge]="updateOptions" class="demo-chart"></div>
+    <div *ngIf="type == 'line'" echarts [options]="options" [merge]="updateOptions" class="demo-chart"></div>
   </mat-card-content>
 </mat-card>

@@ -1,24 +1,29 @@
-import { CoinInfo } from './../models/CoinInfo';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShareDataService {
 
-  public coin$ = new BehaviorSubject<string>(undefined);
-  public coinGrf$ = new BehaviorSubject<string>(undefined);
+  public coin$ = new BehaviorSubject<string[]>(undefined);
 
+  public selectedCoin$ = new Subject<string>();
+
+  public coinName$ = new Subject<string>();
 
   constructor() { }
 
-  public getCoin(): Observable<string> {
+  public getCoin(): Observable<string[]> {
     return this.coin$.asObservable();
   }
-  public getCoinGrf(): Observable<string> {
-    return this.coinGrf$.asObservable();
 
+  public getSelectedCoin(): Observable<string> {
+     console.log("selected coin", this.selectedCoin$);
+    return this.selectedCoin$.asObservable();
   }
 
+  public getName(): Observable<string>{
+     return this.coinName$.asObservable();
+  }
 }

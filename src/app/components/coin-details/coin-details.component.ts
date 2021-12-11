@@ -4,7 +4,6 @@ import { CoinsService } from './../../services/coins.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-coin-details',
@@ -13,37 +12,31 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class CoinDetailsComponent implements OnInit {
 
-  displayedColumns: string[] = ['info', 'image', 'name', 'current_price', 'symbol', 'last_updated', 'favorites', 'graphic'];
+  displayedColumns: string[] = ['info', 'image', 'name', 'current_price', 'symbol', 'last_updated', 'favorites'];
   dataSource = new MatTableDataSource<CoinInfo>();
+  public selectedCoin: CoinInfo;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
-  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-
-
-  public viewDetails(){
-    this.trigger.openMenu();
- }
 
   public setFavorite(element: CoinInfo): void {
     if(this.favoritesSet.has(element.id)) {
       this.favoritesSet.delete(element.id);
-      this.sharedData.coin$.next(element.id);
       console.log('deleted');
     } else {
       this.favoritesSet.add(element.id);
-      this.sharedData.coin$.next(element.id);
       console.log('added');
     }
-  }
 
-  public setGraphic(element: CoinInfo): void {
-     this.sharedData.coinGrf$.next(element.id);
-    console.log('added');
+    this.sharedData.coin$.next([...this.favoritesSet]);
   }
 
   public favoritesSet = new Set<string>();
-  public graphicSet =  new Set<string>();
+
+  public setSelectedCoin(coin: CoinInfo) {
+    this.selectedCoin = coin;
+    this.sharedData.selectedCoin$.next(coin.id);
+    this.sharedData.coinName$.next(coin.name);
+  }
 
   constructor(private coinService: CoinsService, private sharedData: ShareDataService) { }
 
@@ -57,4 +50,3 @@ export class CoinDetailsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 }
-

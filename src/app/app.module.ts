@@ -18,7 +18,11 @@ import { GraphicComponent } from './components/graphic/graphic.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule} from '@angular/material/menu'; 
+import { MatMenuModule } from '@angular/material/menu';
+
+import { NgxEchartsModule } from 'ngx-echarts';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -41,8 +45,13 @@ import { MatMenuModule} from '@angular/material/menu';
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
+    MatMenuModule,
+    MatSlideToggleModule,
+    FormsModule,
     HttpClientModule,
-    MatMenuModule
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
